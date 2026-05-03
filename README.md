@@ -8,9 +8,9 @@ Choose one:
 
 - **ffconverter_1.0-1_amd64.deb** (~500KB) - Debian/Ubuntu
 - **FFConverter-1.0-1.x86_64.rpm** (~500KB) - Fedora/RHEL
-- **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
-- **FFConverter.AppImage** (~1MB) - Any Linux
-- **FFConverter-portable.tar.xz** (~90MB) - Full portable
+- **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (Manual)
+- **FFConverter.AppImage** (~1MB) - Universal Linux AppImage 
+- **FFConverter-portable.tar.xz** (~90MB) - Full Portable
 
 ## Install (DEB) - Debian/Ubuntu
 
