@@ -1,0 +1,32 @@
+# Aider junk
+.aider*
+!.aider.conf.yml
+!.aider.model.settings.yml
+!.aiderignore
+
+# Python junk
+__pycache__/
+*.pyc
+venv/
+.env
+.envrc
+
+# Build junk
+build/
+dist/
+*.spec
+
+# System junk (The stuff you want gone)
+org.freedesktop.LinuxAudio.Plugins*
+
+# Bundled FFmpeg (in release only)
+usr/bin/
+
+# AppImage folder (local build only)
+AppImage/
+
+# Development files
+old_versions/
+PYTHON/
+__pycache__/
+*.pyc
