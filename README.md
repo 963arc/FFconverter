@@ -4,8 +4,28 @@ A simple, portable video, audio, and image converter for Linux.
 
 ## Download
 
-1. Download `FFConverter-portable.tar.xz` from the releases page
-2. Save it to your preferred location (e.g., ~/Downloads)
+Choose one:
+
+- **FFConverter.AppImage** (recommended, ~1MB) - Needs system Python
+- **FFConverter-portable.tar.xz** (~90MB) - Full portable
+
+Download from the releases page and save to your preferred location (e.g., ~/Downloads)
+
+## Run (AppImage)
+
+### Step 1: Make executable
+
+```bash
+chmod +x FFConverter.AppImage
+```
+
+### Step 2: Run
+
+```bash
+./FFConverter.AppImage
+```
+
+That's it! The app will open with a friendly interface.
 
 ## Screenshots
 
@@ -15,7 +35,7 @@ A simple, portable video, audio, and image converter for Linux.
 ### Light Theme
 ![FFConverter Light Theme](screenshot-ui-light_converted.png)
 
-## Install
+## Install (Portable .tar.xz)
 
 ### Step 1: Extract the archive
 
