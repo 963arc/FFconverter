@@ -12,8 +12,6 @@ Choose one:
 - **ffconverter_1.0-1_amd64.deb** (~500KB) - Debian/Ubuntu
 - **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
 
-- **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
-
 ## Install (Arch Linux) - Manual
 
 Extract and install:
