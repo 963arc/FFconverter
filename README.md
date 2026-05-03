@@ -1,5 +1,7 @@
 # FFConverter
 
+![FFConverter Logo](resources/images/LOGO_256.png)
+
 A simple, portable video, audio, and image converter for Linux.
 
 ## Download
