@@ -6,11 +6,11 @@ A simple, portable video, audio, and image converter for Linux.
 
 Choose one:
 
-- **FFConverter.AppImage** (~1MB) - Any Linux, needs system Python
-- **FFConverter-portable.tar.xz** (~90MB) - Full portable
-- **FFConverter-1.0-1.x86_64.rpm** (~500KB) - Fedora/RHEL
 - **ffconverter_1.0-1_amd64.deb** (~500KB) - Debian/Ubuntu
+- **FFConverter-1.0-1.x86_64.rpm** (~500KB) - Fedora/RHEL
 - **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
+- **FFConverter.AppImage** (~1MB) - Any Linux
+- **FFConverter-portable.tar.xz** (~90MB) - Full portable
 
 ## Install (DEB) - Debian/Ubuntu
 
