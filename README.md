@@ -8,7 +8,7 @@ A simple, portable video, audio, and image converter for Linux.
 
 Download your desired version from [Releases](https://github.com/963arc/FFconverter/releases/tag/v1.0).
 
-## Install (DEB) - Debian/Ubuntu
+## Install (DEB) - Debian / Ubuntu
 
 Install dependencies:
 
@@ -26,7 +26,7 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 
 ---
 
-## Install (RPM) - Fedora/RHEL
+## Install (RPM) - Fedora / RHEL
 
 Install dependencies:
 
