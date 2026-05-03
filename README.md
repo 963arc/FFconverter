@@ -10,6 +10,24 @@ Choose one:
 - **FFConverter-portable.tar.xz** (~90MB) - Full portable
 - **FFConverter-1.0-1.x86_64.rpm** (~500KB) - Fedora/RHEL
 - **ffconverter_1.0-1_amd64.deb** (~500KB) - Debian/Ubuntu
+- **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
+
+- **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
+
+## Install (Arch Linux) - Manual
+
+Extract and install:
+
+```bash
+cd FFConverter-1.0-1-x86_64
+sudo cp -r usr /
+```
+
+Run with:
+
+```bash
+/opt/FFConverter/ffc.py
+```
 
 ## Install (DEB) - Debian/Ubuntu
 
