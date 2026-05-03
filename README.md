@@ -12,71 +12,60 @@ Choose one:
 - **ffconverter_1.0-1_amd64.deb** (~500KB) - Debian/Ubuntu
 - **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (manual)
 
-## Install (Arch Linux) - Manual
-
-Extract and install:
-
-```bash
-cd FFConverter-1.0-1-x86_64
-sudo cp -r usr /
-```
-
-Run with:
-
-```bash
-/opt/FFConverter/ffc.py
-```
-
 ## Install (DEB) - Debian/Ubuntu
-
-For Debian, Ubuntu, and derivatives:
-
-```bash
-sudo dpkg -i ffconverter_1.0-1_amd64.deb
-```
-
-Or install dependencies first if needed:
 
 ```bash
 sudo apt install ffmpeg python3
 sudo dpkg -i ffconverter_1.0-1_amd64.deb
 ```
 
-Run with:
+Run: Type `FFConverter` in terminal, or launch from application menu.
 
-```bash
-ffc.py
-```
+---
 
 ## Install (RPM) - Fedora/RHEL
-
-For Fedora, CentOS, RHEL, and derivatives:
 
 ```bash
 sudo dnf install FFConverter-1.0-1.x86_64.rpm
 ```
 
-That's it! Run with:
+Run: Type `FFConverter` in terminal, or launch from application menu.
+
+---
+
+## Install (Arch Linux) - Manual
+
+Extract and copy files:
 
 ```bash
-ffc.py
+tar -xf FFConverter-1.0-1-x86_64.tar.gz
+cd FFConverter-1.0-1-x86_64
+sudo cp -r usr /
 ```
 
-## Run (AppImage)
+Run: Type `FFConverter` in terminal, or launch from application menu.
 
-### Step 1: Make executable
+---
+
+## Install (AppImage)
 
 ```bash
 chmod +x FFConverter.AppImage
-```
-
-### Step 2: Run
-
-```bash
 ./FFConverter.AppImage
 ```
 
-That's it! The app will open with a friendly interface.
+---
+
+## Install (Portable .tar.xz)
+
+```bash
+tar -xf FFConverter-portable.tar.xz
+cd FFConverter
+chmod +x run.sh
+./run.sh
+```
+
+---
 
 ## Screenshots
 
@@ -86,37 +75,11 @@ That's it! The app will open with a friendly interface.
 ### Light Theme
 ![FFConverter Light Theme](screenshot-ui-light_converted.png)
 
-## Install (Portable .tar.xz)
-
-### Step 1: Extract the archive
-
-```bash
-tar -xf FFConverter-portable.tar.xz
-```
-
-### Step 2: Navigate to the folder
-
-```bash
-cd FFConverter
-```
-
-### Step 3: Make the launcher executable
-
-```bash
-chmod +x run.sh
-```
-
-### Step 4: Run the app
-
-```bash
-./run.sh
-```
-
-That's it! The app will open with a friendly interface.
+---
 
 ## Desktop Integration (Optional)
 
-To add FFConverter to your application menu:
+To add FFConverter to your application menu (for portable version):
 
 ```bash
 # Copy desktop file
@@ -129,11 +92,15 @@ cp usr/share/icons/hicolor/256x256/ffconverter.png ~/.local/share/icons/hicolor/
 
 Log out and log back in, or restart your desktop environment for the menu to update.
 
+---
+
 ## Requirements
 
 - **Platform:** Linux only (not Windows or macOS)
 - **Python 3.8 or higher**
 - **FFmpeg is optional** - the app checks your system first, then uses the bundled version if not found
+
+---
 
 ## Troubleshooting
 
@@ -149,8 +116,7 @@ Install Python 3:
 - **Fedora**: `sudo dnf install python3`
 - **Arch Linux**: `sudo pacman -S python`
 
-
-### App won't start
+### App won't start (Portable version)
 Make sure you're in the FFConverter folder and run:
 ```bash
 ./run.sh
@@ -159,7 +125,9 @@ Make sure you're in the FFConverter folder and run:
 ### File too large warning when extracting
 The archive is ~90MB compressed (~388MB uncompressed). Ensure you have enough disk space.
 
-## What's Included
+---
+
+## What's Included (Portable .tar.xz)
 
 | Component | Description |
 |-----------|-------------|
@@ -172,12 +140,28 @@ The archive is ~90MB compressed (~388MB uncompressed). Ensure you have enough di
 
 The app automatically uses system FFmpeg if available, otherwise falls back to the bundled version.
 
+---
+
 ## Uninstall
 
-Simply delete the FFConverter folder:
-
+**Portable version:**
 ```bash
 rm -rf FFConverter
+```
+
+**DEB/RPM:**
+```bash
+# Debian/Ubuntu
+sudo apt remove ffconverter
+
+# Fedora/RHEL
+sudo dnf remove FFConverter
+```
+
+**Arch:**
+```bash
+sudo rm -rf /opt/FFConverter
+sudo rm /usr/bin/FFConverter
 ```
 
 To remove desktop integration:
@@ -186,6 +170,8 @@ To remove desktop integration:
 rm ~/.local/share/applications/ffconverter.desktop
 rm ~/.local/share/icons/hicolor/256x256/apps/ffconverter.png
 ```
+
+---
 
 ## Support
 
