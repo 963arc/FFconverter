@@ -6,13 +6,7 @@ A simple, portable video, audio, and image converter for Linux.
 
 ## Download
 
-Choose one:
-
-- **ffconverter_1.0-1_amd64.deb** (~500KB) - Debian/Ubuntu
-- **FFConverter-1.0-1.x86_64.rpm** (~500KB) - Fedora/RHEL
-- **FFConverter-1.0-1-x86_64.tar.gz** (~500KB) - Arch Linux (Manual)
-- **FFConverter.AppImage** (~1MB) - Universal Linux AppImage 
-- **FFConverter-portable.tar.xz** (~90MB) - Full Portable
+Download your desired version from [Releases](https://github.com/963arc/FFconverter/releases/tag/v1.0).
 
 ## Install (DEB) - Debian/Ubuntu
 
