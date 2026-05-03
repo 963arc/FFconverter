@@ -26,6 +26,7 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 ## Install (RPM) - Fedora/RHEL
 
 ```bash
+sudo dnf install ffmpeg python3
 sudo dnf install FFConverter-1.0-1.x86_64.rpm
 ```
 
@@ -34,6 +35,12 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 ---
 
 ## Install (Arch Linux) - Manual
+
+Install dependencies:
+
+```bash
+sudo pacman -S ffmpeg python
+```
 
 Extract and copy files:
 
