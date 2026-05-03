@@ -19,7 +19,7 @@ sudo apt install ffmpeg python3
 Extract and install package:
 
 ```bash
-sudo dpkg -i ffconverter_1.0-1_amd64.deb
+sudo dpkg -i FFConverter_1.0-1_amd64.deb
 ```
 
 Run: Type `FFConverter` in terminal, or launch from application menu.
