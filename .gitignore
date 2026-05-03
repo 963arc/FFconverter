@@ -1,0 +1,9 @@
+# Python junk
+__pycache__/
+*.pyc
+
+# Bundled FFmpeg (in release only)
+usr/bin/
+
+# AppImage folder (local build only)
+AppImage/
