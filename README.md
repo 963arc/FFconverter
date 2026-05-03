@@ -6,10 +6,25 @@ A simple, portable video, audio, and image converter for Linux.
 
 Choose one:
 
-- **FFConverter.AppImage** (recommended, ~1MB) - Needs system Python
-- **FFConverter-portable.tar.xz** (~90MB) - Full portable
+- **FFConverter.AppImage** (~1MB) - Any Linux, needs system Python
+- **FFConverter-portable.tar.xz** (~90MB) - Full portable, includes everything
+- **FFConverter-1.0-1.x86_64.rpm** (~500KB) - Fedora/RHEL, needs system Python + FFmpeg
 
 Download from the releases page and save to your preferred location (e.g., ~/Downloads)
+
+## Install (RPM) - Fedora/RHEL
+
+For Fedora, CentOS, RHEL, and derivatives:
+
+```bash
+sudo dnf install FFConverter-1.0-1.x86_64.rpm
+```
+
+That's it! Run with:
+
+```bash
+ffc.py
+```
 
 ## Run (AppImage)
 
