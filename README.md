@@ -14,8 +14,15 @@ Choose one:
 
 ## Install (DEB) - Debian/Ubuntu
 
+Install dependencies:
+
 ```bash
 sudo apt install ffmpeg python3
+```
+
+Extract and install package:
+
+```bash
 sudo dpkg -i ffconverter_1.0-1_amd64.deb
 ```
 
@@ -25,8 +32,15 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 
 ## Install (RPM) - Fedora/RHEL
 
+Install dependencies:
+
 ```bash
 sudo dnf install ffmpeg python3
+```
+
+Extract and install package:
+
+```bash
 sudo dnf install FFConverter-1.0-1.x86_64.rpm
 ```
 
