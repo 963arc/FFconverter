@@ -4,7 +4,7 @@
 
 A simple, portable video, audio, and image converter for Linux.
 
-## -"How to download?"
+## - "How to download?"
 
 Download your desired version from [Releases](https://github.com/963arc/FFconverter/releases/tag/v1.0).
 
