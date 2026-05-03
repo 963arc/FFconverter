@@ -205,7 +205,6 @@ If this project saved you time, consider sending a tip!
 | **Solana** | SOL | `7XpptWv6db53GYiHXioUnr9phHV5tB7zo5z9wvLynFGC` |
 | **Monero** | XMR | `8BL7SNroN7XGqxS8CmgBQyPB7UPSZ2uKtRSHmSk815GNh56oKFpmdWh2Ko2Pe4XsjM3oChNpkh5bxVzgSvvgaPBNGR7TJ4d` |
 | **Litecoin** | LTC | `LdKdCyq7SEhELJa7kvH9Unu8dTnn3Dm9i8` |
-| **FiatCard/Paypal** | Ko-Fi | `ko-fi.com/369arc` |
 
 > *Note: The Ethereum address supports ETH, USDT, USDC, Polygon, and BNB Chain.*
 
