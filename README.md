@@ -93,6 +93,20 @@ flatpak run com.ffconverter.FFConverter
 
 ---
 
+## Install (ARM64) - Raspberry Pi / ARM Linux
+
+For ARM64 devices (Raspberry Pi 4/5, ARM servers):
+
+```bash
+wget https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-portable-arm64.tar.xz
+tar -xf FFConverter-portable-arm64.tar.xz
+cd FFConverter-portable-arm64
+chmod +x run.sh
+./run.sh
+```
+
+---
+
 ## Screenshots
 
 ### Dark Theme
