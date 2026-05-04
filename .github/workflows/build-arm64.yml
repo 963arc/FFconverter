@@ -1,0 +1,55 @@
+name: Build ARM64
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build-arm64:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ffmpeg python3 python3-pip python3-venv
+          pip3 install customtkinter darkdetect pillow send2trash tkinterdnd2
+
+      - name: Build Portable
+        run: |
+          mkdir -p FFConverter-portable-arm64/usr/bin
+          mkdir -p FFConverter-portable-arm64/usr/share/applications
+          mkdir -p FFConverter-portable-arm64/usr/share/icons/hicolor/256x256/apps
+          
+          # Copy app files - use system python since we can't bundle it
+          cp ffc.py FFConverter-portable-arm64/
+          cp run.sh FFConverter-portable-arm64/
+          
+          # Use system ffmpeg (no bundled for ARM)
+          chmod +x FFConverter-portable-arm64/run.sh
+          sed -i 's|#!/bin/bash|#!/usr/bin/python3|g' FFConverter-portable-arm64/run.sh
+          sed -i 's|exec "${BASH_SOURCE}"|exec python3 "$0"|g' FFConverter-portable-arm64/run.sh
+          
+          cp run.sh FFConverter-portable-arm64/usr/bin/FFConverter
+          cp ffc.py FFConverter-portable-arm64/usr/bin/
+          
+          # Copy desktop files
+          cp usr/share/applications/ffconverter.desktop FFConverter-portable-arm64/usr/share/applications/
+          cp usr/share/icons/hicolor/256x256/ffconverter.png FFConverter-portable-arm64/usr/share/icons/hicolor/256x256/apps/
+          
+          # Create the archive
+          cd FFConverter-portable-arm64
+          tar -cJf ../FFConverter-portable-arm64.tar.xz .
+          cd ..
+
+      - name: Upload as release artifact
+        uses: actions/upload-release-asset@v1
+        if: github.event_name == 'release'
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: FFConverter-portable-arm64.tar.xz
+          asset_name: FFConverter-portable-arm64.tar.xz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
