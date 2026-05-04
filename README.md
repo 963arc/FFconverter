@@ -16,9 +16,10 @@ Install dependencies:
 sudo apt install ffmpeg python3
 ```
 
-Extract and install package:
+Download and install package:
 
 ```bash
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter_1.0-1_amd64.deb
 sudo dpkg -i FFConverter_1.0-1_amd64.deb
 ```
 
@@ -34,9 +35,10 @@ Install dependencies:
 sudo dnf install ffmpeg python3
 ```
 
-Extract and install package:
+Download and install package:
 
 ```bash
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-1.0-1.x86_64.rpm
 sudo dnf install FFConverter-1.0-1.x86_64.rpm
 ```
 
@@ -52,9 +54,10 @@ Install dependencies:
 sudo pacman -S ffmpeg python
 ```
 
-Extract and copy files:
+Download and copy files:
 
 ```bash
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-1.0-1-x86_64.tar.gz
 tar -xf FFConverter-1.0-1-x86_64.tar.gz
 cd FFConverter-1.0-1-x86_64
 sudo cp -r usr /
@@ -67,6 +70,7 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 ## Install (AppImage)
 
 ```bash
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter.AppImage
 chmod +x FFConverter.AppImage
 ./FFConverter.AppImage
 ```
@@ -76,6 +80,7 @@ chmod +x FFConverter.AppImage
 ## Install (Portable .tar.xz)
 
 ```bash
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-portable.tar.xz
 tar -xf FFConverter-portable.tar.xz
 cd FFConverter
 chmod +x run.sh
@@ -87,6 +92,7 @@ chmod +x run.sh
 ## Install (Flatpak)
 
 ```bash
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter.flatpak
 flatpak install --user FFConverter.flatpak
 flatpak run com.ffconverter.FFConverter
 ```
@@ -98,7 +104,7 @@ flatpak run com.ffconverter.FFConverter
 For ARM64 devices (Raspberry Pi 4/5, ARM servers):
 
 ```bash
-wget https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-portable-arm64.tar.xz
+curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-portable-arm64.tar.xz
 tar -xf FFConverter-portable-arm64.tar.xz
 cd FFConverter-portable-arm64
 chmod +x run.sh
