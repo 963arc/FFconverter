@@ -1,6 +1,6 @@
 # FFConverter
 
-![FFConverter Logo](resources/images/LOGO_256.png)
+<img width="1456" height="720" alt="wmremove-transformed" src="https://github.com/user-attachments/assets/4db1bbc7-805a-4bfa-a0c5-523a4cd7f153" />
 
 A simple, portable video, audio, and image converter for Linux.
 
