@@ -84,6 +84,17 @@ chmod +x run.sh
 
 ---
 
+## Install (Flatpak)
+
+Download the flatpak bundle and install:
+
+```bash
+flatpak install --user FFConverter.flatpak
+flatpak run com.ffconverter.FFConverter
+```
+
+---
+
 ## Screenshots
 
 ### Dark Theme
