@@ -13,7 +13,8 @@ Download your desired version from [Releases](https://github.com/963arc/FFconver
 Install dependencies:
 
 ```bash
-sudo apt install ffmpeg python3
+sudo apt install ffmpeg python3 python3-tk python3-pip
+pip3 install --break-system-packages customtkinter send2trash tkinterdnd2
 ```
 
 Download and install package:
@@ -21,6 +22,12 @@ Download and install package:
 ```bash
 curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter_1.0-1_amd64.deb
 sudo dpkg -i FFConverter_1.0-1_amd64.deb
+```
+
+**Troubleshooting:** If the app fails to launch with "ModuleNotFoundError", install the Python packages:
+
+```bash
+pip3 install --break-system-packages customtkinter send2trash tkinterdnd2
 ```
 
 Run: Type `FFConverter` in terminal, or launch from application menu.
