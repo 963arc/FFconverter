@@ -10,9 +10,6 @@ Source0:        %{url}/archive/refs/tags/v%{version}.tar.gz
 Requires:       python3
 Requires:       python3-pip
 Requires:       python3-tkinter
-Requires:       python3-pystray
-Requires:       python3-pillow
-Requires:       python3-six
 Recommends:     ffmpeg
 
 BuildRequires:  python3-pip-build
