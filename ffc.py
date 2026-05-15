@@ -57,6 +57,15 @@ try:
     SEND2TRASH_AVAILABLE = True
 except ImportError:
     SEND2TRASH_AVAILABLE = False
+
+# Check for pystray availability for system tray support
+try:
+    import pystray
+    from PIL import Image
+
+    PYSTRAY_AVAILABLE = True
+except ImportError:
+    PYSTRAY_AVAILABLE = False
 # CTkDnD
 if TKINTERDND_AVAILABLE:
 
@@ -1405,6 +1414,11 @@ class FFConverterApp(CTkDnD):
 
         if not SEND2TRASH_AVAILABLE:
             print("Warning: Safe deletion disabled. Install: pip install send2trash")
+
+        if not PYSTRAY_AVAILABLE:
+            print("Warning: System tray icon disabled. Install: pip install pystray pillow")
+        else:
+            self._setup_tray_icon()
 
         # Vars
         default_msg = "FILE NOT SELECTED. CLICK ON BROWSE TO SELECT FILES"
@@ -4192,6 +4206,73 @@ class FFConverterApp(CTkDnD):
 
         # Destroy the root window to close the application
         self.winfo_toplevel().destroy()
+
+    def _setup_tray_icon(self):
+        """Setup system tray icon for minimize to tray functionality."""
+        try:
+            from PIL import Image
+            
+            # Create tray icon from the app icon
+            icon_path = CURRENT_DIR / "resources" / "images" / "LOGO_256.png"
+            if not icon_path.exists():
+                icon_path = CURRENT_DIR / "ffconverter.png"
+            
+            if icon_path.exists():
+                # Load and convert icon for tray
+                icon_image = Image.open(str(icon_path))
+                # Resize to standard tray icon size
+                icon_image = icon_image.resize((64, 64), Image.LANCZOS)
+                
+                # Create menu for tray
+                menu = pystray.Menu(
+                    pystray.MenuItem("Show", self._show_from_tray, default=True),
+                    pystray.MenuItem("Quit", self._quit_from_tray)
+                )
+                
+                # Create the tray icon
+                self.tray_icon = pystray.Icon(
+                    "FFConverter",
+                    icon_image,
+                    "FFConverter",
+                    menu
+                )
+                
+                # Start tray icon in a separate thread
+                import threading
+                self.tray_thread = threading.Thread(target=self.tray_icon.run, daemon=True)
+                self.tray_thread.start()
+            else:
+                print("Warning: Could not find icon file for tray")
+        except Exception as e:
+            print(f"Warning: Failed to setup tray icon: {e}")
+
+    def _show_from_tray(self, icon=None, item=None):
+        """Show the main window from tray."""
+        self.after(0, self.deiconify)
+        self.after(0, self.lift)
+        # Stop the tray icon when showing
+        if hasattr(self, 'tray_icon'):
+            try:
+                self.tray_icon.stop()
+            except Exception:
+                pass
+
+    def _quit_from_tray(self, icon=None, item=None):
+        """Quit the application from tray."""
+        if hasattr(self, 'tray_icon'):
+            try:
+                self.tray_icon.stop()
+            except Exception:
+                pass
+        self._on_closing()
+
+    def _on_closing(self):
+        """Handle window close - minimize to tray instead of quitting."""
+        if hasattr(self, 'tray_icon'):
+            self.withdraw()  # Hide the window instead of closing
+        else:
+            # Fallback to original behavior if tray not available
+            self._cleanup_and_exit()
 
 
 if __name__ == "__main__":

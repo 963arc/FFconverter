@@ -23,8 +23,8 @@ modules:
   - name: python-deps
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app --no-build-isolation packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl
-    sources:
+      - pip3 install --prefix=/app --no-build-isolation packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl pystray-0.19.5-py2.py3-none-any.whl pillow-12.2.0-py3-none-any.whl
+sources:
       - type: file
         path: pip-wheels/packaging-26.2-py3-none-any.whl
       - type: file
@@ -35,6 +35,10 @@ modules:
         path: pip-wheels/send2trash-2.1.0-py3-none-any.whl
       - type: file
         path: pip-wheels/tkinterdnd2-0.4.3-py3-none-any.whl
+      - type: file
+        path: pip-wheels/pystray-0.19.5-py2.py3-none-any.whl
+      - type: file
+        path: pip-wheels/pillow-12.2.0-py3-none-any.whl
 
   - name: ffconverter-app
     buildsystem: simple
@@ -42,8 +46,8 @@ modules:
       - mkdir -p /app/bin /app/share/ffconverter /app/share/applications /app/share/icons/hicolor/256x256/apps /app/share/licenses/com.ffconverter.FFConverter
       - cp ffc.py /app/share/ffconverter/
       - cp ffconverter-launcher /app/bin/
-      - cp ffconverter.desktop /app/share/applications/
-      - cp ffconverter.png /app/share/icons/hicolor/256x256/apps/
+      - cp com.ffconverter.FFConverter.desktop /app/share/applications/
+      - cp com.ffconverter.FFConverter.png /app/share/icons/hicolor/256x256/apps/
       - cp LICENSE /app/share/licenses/com.ffconverter.FFConverter/
       - chmod +x /app/bin/ffconverter-launcher
     sources:
@@ -52,8 +56,8 @@ modules:
       - type: file
         path: ffconverter-launcher
       - type: file
-        path: ffconverter.desktop
+        path: com.ffconverter.FFConverter.desktop
       - type: file
-        path: ffconverter.png
+        path: com.ffconverter.FFConverter.png
       - type: file
         path: LICENSE
