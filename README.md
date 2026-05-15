@@ -29,17 +29,25 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 
 ## Install (RPM) - Fedora / RHEL
 
-Install dependencies:
-
-```bash
-sudo dnf install ffmpeg python3
-```
+> **Note:** FFmpeg is optional - the app includes a bundled fallback. If you don't have FFmpeg installed, the app will still work using its built-in version.
 
 Download and install package:
 
 ```bash
 curl -LO https://github.com/963arc/FFconverter/releases/download/v1.0/FFConverter-1.0-1.x86_64.rpm
 sudo dnf install FFConverter-1.0-1.x86_64.rpm
+```
+
+**Troubleshooting:** If you get an error about FFmpeg conflicts (common on Fedora with rpmfusion), use:
+
+```bash
+sudo dnf install --allowerasing FFConverter-1.0-1.x86_64.rpm
+```
+
+Or install without dependencies and use bundled FFmpeg:
+
+```bash
+sudo rpm -ivh --nodeps FFConverter-1.0-1.x86_64.rpm
 ```
 
 Run: Type `FFConverter` in terminal, or launch from application menu.
