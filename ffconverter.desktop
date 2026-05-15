@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=FFConverter
+Comment=Simple Video, Audio, and Image Converter
+GenericName=Media Converter
+Exec=run.sh %F
+Terminal=false
+Categories=AudioVideo;Audio;Video;Graphics;
+Keywords=convert;video;audio;image;ffmpeg;media;
+MimeType=video/*;audio/*;image/*;
+Icon=ffconverter
+StartupNotify=true

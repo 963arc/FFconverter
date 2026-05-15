@@ -1,0 +1,66 @@
+app-id: com.ffconverter.FFConverter
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: ffconverter-launcher
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --filesystem=home
+  - --device=dri
+
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    add-ld-path: .
+    version: '23.08'
+
+modules:
+  - name: python-deps
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-build-isolation --force-reinstall --root-user-action=ignore customtkinter send2trash tkinterdnd2 pillow
+    sources:
+      - type: pip
+        url: https://pypi.org/simple
+        packages:
+          - customtkinter
+          - send2trash
+          - tkinterdnd2
+          - pillow
+
+  - name: ffconverter-app
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin /app/share/ffconverter /app/share/applications /app/share/icons/hicolor/256x256/apps /app/share/licenses/com.ffconverter.FFConverter
+      - cp ffc.py /app/share/ffconverter/
+      - cp ffconverter-launcher /app/bin/
+      - cp ffconverter.desktop /app/share/applications/
+      - cp ffconverter.png /app/share/icons/hicolor/256x256/apps/
+      - cp LICENSE /app/share/licenses/com.ffconverter.FFConverter/
+      - chmod +x /app/bin/ffconverter-launcher
+    sources:
+      - type: dir
+        path: .
+        excludes:
+          - "*.yml"
+          - "*.yaml"
+          - "*.md"
+          - .git
+          - .github
+          - usr
+          - build-dir
+          - flatpak
+          - debian
+          - .flatpak-builder
+          - "*.spec"
+          - build-*
+          - ffc.flatpak
+          - FFConverter-*
+          - FFConverter-backup
+          - FFConverter-build
+          - ffconverter-flatpak
