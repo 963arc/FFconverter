@@ -1,3 +1,6 @@
+%global debug_package %{nil}
+%global __spec_install_post %{lua: print(""); }
+
 Name:           FFConverter
 Version:        1.0
 Release:        1%{?dist}
@@ -15,7 +18,7 @@ Requires:       python3-pillow
 Requires:       python3-six
 Recommends:     ffmpeg
 
-BuildRequires:  /bin/true
+BuildRequires:  make
 
 %description
 FFConverter is a simple, portable video, audio, and image converter for Linux.
@@ -32,13 +35,20 @@ for converting between various media formats.
 # Create directories
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_mandir}/man1
+mkdir -p %{buildroot}%{_datadir}/ffconverter
 mkdir -p %{buildroot}%{_datadir}/applications
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/256x256/apps
 mkdir -p %{buildroot}%{_datadir}/licenses/FFConverter
 
-# Install main script
-install -m 755 ffc.py %{buildroot}%{_bindir}/FFConverter
-install -m 755 run.sh %{buildroot}%{_bindir}/ffconverter-run
+# Install main script to share directory (for tray icon access)
+install -m 755 ffc.py %{buildroot}%{_datadir}/ffconverter/
+install -m 755 run.sh %{buildroot}%{_datadir}/ffconverter/
+install -m 644 ffconverter.png %{buildroot}%{_datadir}/ffconverter/
+
+# Create wrapper in bin
+echo '#!/bin/bash' > %{buildroot}%{_bindir}/FFConverter
+echo 'python3 %{_datadir}/ffconverter/ffc.py "$@"' >> %{buildroot}%{_bindir}/FFConverter
+chmod +x %{buildroot}%{_bindir}/FFConverter
 
 # Install desktop file
 install -m 644 usr/share/applications/ffconverter.desktop %{buildroot}%{_datadir}/applications/
@@ -51,7 +61,9 @@ install -m 644 LICENSE %{buildroot}%{_datadir}/licenses/FFConverter/
 
 %files
 %{_bindir}/FFConverter
-%{_bindir}/ffconverter-run
+%{_datadir}/ffconverter/ffc.py
+%{_datadir}/ffconverter/run.sh
+%{_datadir}/ffconverter/ffconverter.png
 %{_datadir}/applications/ffconverter.desktop
 %{_datadir}/icons/hicolor/256x256/apps/ffconverter.png
 %{_datadir}/licenses/FFConverter/LICENSE

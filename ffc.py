@@ -4211,13 +4211,25 @@ class FFConverterApp(CTkDnD):
         """Setup system tray icon for minimize to tray functionality."""
         try:
             from PIL import Image
+            import pystray
+            import threading
+            import os
             
-            # Create tray icon from the app icon
-            icon_path = CURRENT_DIR / "resources" / "images" / "LOGO_256.png"
-            if not icon_path.exists():
-                icon_path = CURRENT_DIR / "ffconverter.png"
+            # Create tray icon from the app icon - check multiple locations
+            possible_paths = [
+                CURRENT_DIR / "resources" / "images" / "LOGO_256.png",
+                CURRENT_DIR / "ffconverter.png",
+                "/usr/share/ffconverter/ffconverter.png",
+                "/usr/share/icons/hicolor/256x256/apps/ffconverter.png",
+            ]
             
-            if icon_path.exists():
+            icon_path = None
+            for path in possible_paths:
+                if path.exists():
+                    icon_path = path
+                    break
+            
+            if icon_path:
                 # Load and convert icon for tray
                 icon_image = Image.open(str(icon_path))
                 # Resize to standard tray icon size
@@ -4237,14 +4249,27 @@ class FFConverterApp(CTkDnD):
                     menu
                 )
                 
-                # Start tray icon in a separate thread
-                import threading
-                self.tray_thread = threading.Thread(target=self.tray_icon.run, daemon=True)
+                # Start tray icon in a non-daemon thread to avoid signal issues
+                self.tray_thread = threading.Thread(target=self._run_tray, daemon=False)
                 self.tray_thread.start()
+                print("System tray icon initialized")
             else:
                 print("Warning: Could not find icon file for tray")
         except Exception as e:
             print(f"Warning: Failed to setup tray icon: {e}")
+
+    def _run_tray(self):
+        """Run tray icon - handles signal issue by catching exceptions"""
+        try:
+            import signal
+            # Ignore SIGINT in tray thread to avoid conflicts
+            signal.signal(signal.SIGINT, signal.SIG_IGN)
+        except Exception:
+            pass
+        try:
+            self.tray_icon.run()
+        except Exception as e:
+            print(f"Warning: Tray icon stopped: {e}")
 
     def _show_from_tray(self, icon=None, item=None):
         """Show the main window from tray."""
