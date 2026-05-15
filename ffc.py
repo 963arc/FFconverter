@@ -4208,12 +4208,11 @@ class FFConverterApp(CTkDnD):
         self.winfo_toplevel().destroy()
 
     def _setup_tray_icon(self):
-        """Setup system tray icon for minimize to tray functionality using AppIndicator."""
+        """Setup system tray icon using GTK StatusIcon (most reliable)."""
         try:
             import gi
             gi.require_version('Gtk', '3.0')
-            gi.require_version('AppIndicator3', '0.1')
-            from gi.repository import Gtk, AppIndicator3
+            from gi.repository import Gtk
             import os
             
             # Find icon - check multiple locations
@@ -4234,12 +4233,10 @@ class FFConverterApp(CTkDnD):
                 print("Warning: Could not find icon file for tray")
                 return
             
-            # Create AppIndicator
-            self.tray_indicator = AppIndicator3.Indicator.new(
-                "FFConverter",
-                icon_path,
-                AppIndicator3.IndicatorStatus.ACTIVE
-            )
+            # Create GTK StatusIcon
+            self.tray_icon = Gtk.StatusIcon.new_from_icon_name(icon_path)
+            self.tray_icon.set_tooltip_text("FFConverter")
+            self.tray_icon.set_visible(True)
             
             # Create menu
             menu = Gtk.Menu()
@@ -4253,24 +4250,24 @@ class FFConverterApp(CTkDnD):
             menu.append(quit_item)
             
             menu.show_all()
-            self.tray_indicator.set_menu(menu)
-            self.tray_indicator.set_title("FFConverter")
+            self.tray_icon.set_menu(menu)
             
-            print("System tray icon initialized (AppIndicator)")
+            # Connect click handler
+            self.tray_icon.connect("activate", self._show_from_tray)
+            
+            print("System tray icon initialized (GTK StatusIcon)")
         except Exception as e:
-            print(f"Warning: Failed to setup tray icon (AppIndicator): {e}")
-            # Fallback to pystray if AppIndicator not available
+            print(f"Warning: Failed to setup tray icon (GTK): {e}")
             self._setup_tray_icon_pystray()
 
     def _setup_tray_icon_pystray(self):
-        """Fallback to pystray if AppIndicator fails."""
+        """Fallback to pystray using spawn (avoids signal issues)."""
         try:
             from PIL import Image
             import pystray
-            import threading
             import os
+            import threading
             
-            # Create tray icon from the app icon - check multiple locations
             possible_paths = [
                 "/usr/share/ffconverter/ffconverter.png",
                 "/usr/share/icons/hicolor/256x256/apps/ffconverter.png",
@@ -4288,34 +4285,27 @@ class FFConverterApp(CTkDnD):
                 print("Warning: Could not find icon file for tray")
                 return
             
-            # Load and convert icon for tray
             icon_image = Image.open(icon_path)
             icon_image = icon_image.resize((64, 64), Image.LANCZOS)
             
+            def on_quit(icon, item):
+                self._quit_from_tray()
+            
+            def on_show(icon, item):
+                self._show_from_tray()
+            
             menu = pystray.Menu(
-                pystray.MenuItem("Show", self._show_from_tray, default=True),
-                pystray.MenuItem("Quit", self._quit_from_tray)
+                pystray.MenuItem("Show", on_show, default=True),
+                pystray.MenuItem("Quit", on_quit)
             )
             
             self.tray_icon = pystray.Icon("FFConverter", icon_image, "FFConverter", menu)
             
-            self.tray_thread = threading.Thread(target=self._run_tray, daemon=False)
-            self.tray_thread.start()
-            print("System tray icon initialized (pystray fallback)")
+            # Use spawn instead of threading.run() to avoid signal issues
+            self.tray_icon.run_detached()
+            print("System tray icon initialized (pystray spawn)")
         except Exception as e:
             print(f"Warning: Failed to setup tray icon (pystray): {e}")
-
-    def _run_tray(self):
-        """Run tray icon - handles signal issue by catching exceptions"""
-        try:
-            import signal
-            signal.signal(signal.SIGINT, signal.SIG_IGN)
-        except Exception:
-            pass
-        try:
-            self.tray_icon.run()
-        except Exception as e:
-            print(f"Warning: Tray icon stopped: {e}")
 
     def _show_from_tray(self, icon=None, item=None):
         """Show the main window from tray."""
