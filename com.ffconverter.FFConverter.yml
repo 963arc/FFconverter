@@ -1,6 +1,6 @@
 app-id: com.ffconverter.FFConverter
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: ffconverter-launcher
 
@@ -17,7 +17,7 @@ add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
     directory: lib/ffmpeg
     add-ld-path: .
-    version: '25.08'
+    version: '23.08'
 
 modules:
   - name: python-deps
