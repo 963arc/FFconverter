@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           FFConverter
 Version:        1.0
 Release:        1%{?dist}
@@ -5,7 +7,7 @@ Summary:        Simple Video, Audio, and Image Converter for Linux
 
 License:        GPL-3.0-or-later
 URL:            https://github.com/963arc/FFConverter
-Source0:        %{url}/archive/refs/tags/v%{version}.tar.gz
+Source0:        %{name}-%{version}.tar.gz
 
 Requires:       python3
 Requires:       python3-pip
@@ -15,7 +17,9 @@ Requires:       python3-pillow
 Requires:       python3-six
 Recommends:     ffmpeg
 
-BuildRequires:  python3-pip-build
+BuildRequires:  /bin/true
+
+%define debug_package %{nil}
 
 %description
 FFConverter is a simple, portable video, audio, and image converter for Linux.
