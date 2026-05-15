@@ -7,7 +7,7 @@ Standards-Version: 4.6.0
 
 Package: ffconverter
 Architecture: all
-Depends: python3, python3-tk, python3-pip, python3-pystray, python3-pil, python3-six, ${misc:Depends}
+Depends: python3, python3-tk, python3-pip, ${misc:Depends}
 Description: Simple Video, Audio, and Image Converter for Linux
  FFConverter is a simple, portable video, audio, and image converter for Linux.
  Built with Python and FFmpeg, it provides an easy-to-use graphical interface

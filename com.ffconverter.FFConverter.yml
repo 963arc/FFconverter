@@ -1,6 +1,6 @@
 app-id: com.ffconverter.FFConverter
 runtime: org.freedesktop.Platform
-runtime-version: '25.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: ffconverter-launcher
 
@@ -17,13 +17,13 @@ add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
     directory: lib/ffmpeg
     add-ld-path: .
-    version: '25.08'
+    version: '23.08'
 
 modules:
   - name: python-deps
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app --ignore-installed packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl six-1.17.0-py2.py3-none-any.whl
+      - pip3 install --prefix=/app --ignore-installed packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl
     sources:
       - type: file
         path: pip-wheels/packaging-26.2-py3-none-any.whl
@@ -35,8 +35,6 @@ modules:
         path: pip-wheels/send2trash-2.1.0-py3-none-any.whl
       - type: file
         path: pip-wheels/tkinterdnd2-0.4.3-py3-none-any.whl
-      - type: file
-        path: pip-wheels/six-1.17.0-py2.py3-none-any.whl
 
   - name: ffconverter-app
     buildsystem: simple
