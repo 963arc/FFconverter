@@ -29,7 +29,8 @@ Run: Type `FFConverter` in terminal, or launch from application menu.
 
 ## Install (RPM) - Fedora / RHEL
 
-> **Note:** FFmpeg is optional - the app includes a bundled fallback. If you don't have FFmpeg installed, the app will still work using its built-in version.
+> **Note:** FFmpeg is optional - the app includes a bundled fallback.
+> If you don't have FFmpeg installed, the app will still work using its built-in version.
 
 Download and install package:
 
