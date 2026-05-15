@@ -15,7 +15,7 @@ Requires:       python3-pillow
 Requires:       python3-six
 Recommends:     ffmpeg
 
-BuildRequires:  python3-pip-build
+BuildRequires:  /bin/true
 
 %description
 FFConverter is a simple, portable video, audio, and image converter for Linux.
