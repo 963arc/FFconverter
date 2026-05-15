@@ -23,8 +23,8 @@ modules:
   - name: python-deps
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app --no-build-isolation packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl pystray-0.19.5-py2.py3-none-any.whl pillow-12.2.0-py3-none-any.whl
-sources:
+      - pip3 install --prefix=/app --no-build-isolation packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl
+    sources:
       - type: file
         path: pip-wheels/packaging-26.2-py3-none-any.whl
       - type: file
@@ -35,10 +35,6 @@ sources:
         path: pip-wheels/send2trash-2.1.0-py3-none-any.whl
       - type: file
         path: pip-wheels/tkinterdnd2-0.4.3-py3-none-any.whl
-      - type: file
-        path: pip-wheels/pystray-0.19.5-py2.py3-none-any.whl
-      - type: file
-        path: pip-wheels/pillow-12.2.0-py3-none-any.whl
 
   - name: ffconverter-app
     buildsystem: simple
