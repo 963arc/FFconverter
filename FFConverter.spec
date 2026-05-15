@@ -16,6 +16,8 @@ Requires:       python3-tkinter
 Requires:       python3-pystray
 Requires:       python3-pillow
 Requires:       python3-six
+Requires:       python3-gobject
+Requires:       libappindicator-gtk3
 Recommends:     ffmpeg
 
 BuildRequires:  make
