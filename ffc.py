@@ -4208,12 +4208,11 @@ class FFConverterApp(CTkDnD):
         self.winfo_toplevel().destroy()
 
     def _setup_tray_icon(self):
-        """Setup system tray icon using GTK StatusIcon (most reliable)."""
+        """Setup system tray icon using subprocess to avoid signal issues."""
         try:
-            import gi
-            gi.require_version('Gtk', '3.0')
-            from gi.repository import Gtk
+            import subprocess
             import os
+            import sys
             
             # Find icon - check multiple locations
             possible_paths = [
@@ -4233,79 +4232,74 @@ class FFConverterApp(CTkDnD):
                 print("Warning: Could not find icon file for tray")
                 return
             
-            # Create GTK StatusIcon
-            self.tray_icon = Gtk.StatusIcon.new_from_icon_name(icon_path)
-            self.tray_icon.set_tooltip_text("FFConverter")
-            self.tray_icon.set_visible(True)
-            
-            # Create menu
-            menu = Gtk.Menu()
-            
-            show_item = Gtk.MenuItem.new_with_label("Show")
-            show_item.connect("activate", self._show_from_tray)
-            menu.append(show_item)
-            
-            quit_item = Gtk.MenuItem.new_with_label("Quit")
-            quit_item.connect("activate", self._quit_from_tray)
-            menu.append(quit_item)
-            
-            menu.show_all()
-            self.tray_icon.set_menu(menu)
-            
-            # Connect click handler
-            self.tray_icon.connect("activate", self._show_from_tray)
-            
-            print("System tray icon initialized (GTK StatusIcon)")
-        except Exception as e:
-            print(f"Warning: Failed to setup tray icon (GTK): {e}")
-            self._setup_tray_icon_pystray()
+            # Create a separate script for tray icon
+            tray_script = f'''#!/usr/bin/env python3
+import sys
+import os
+from PIL import Image
+import pystray
+import threading
 
-    def _setup_tray_icon_pystray(self):
-        """Fallback to pystray using spawn (avoids signal issues)."""
-        try:
-            from PIL import Image
-            import pystray
-            import os
-            import threading
+def show_window(icon, item):
+    # Signal parent to show window
+    with open("/tmp/ffconverter_tray_show", "w") as f:
+        f.write("1")
+
+def quit_app(icon, item):
+    # Signal parent to quit
+    with open("/tmp/ffconverter_tray_quit", "w") as f:
+        f.write("1")
+    icon.stop()
+
+icon_path = "{icon_path}"
+icon_image = Image.open(icon_path)
+icon_image = icon_image.resize((64, 64), Image.LANCZOS)
+
+menu = pystray.Menu(
+    pystray.MenuItem("Show", show_window, default=True),
+    pystray.MenuItem("Quit", quit_app)
+)
+
+tray = pystray.Icon("FFConverter", icon_image, "FFConverter", menu)
+tray.run()
+'''
             
-            possible_paths = [
-                "/usr/share/ffconverter/ffconverter.png",
-                "/usr/share/icons/hicolor/256x256/apps/ffconverter.png",
-                str(CURRENT_DIR / "ffconverter.png"),
-                str(CURRENT_DIR / "resources" / "images" / "LOGO_256.png"),
-            ]
+            # Write tray script to temp file
+            script_path = "/tmp/ffconverter_tray.py"
+            with open(script_path, "w") as f:
+                f.write(tray_script)
             
-            icon_path = None
-            for path in possible_paths:
-                if os.path.exists(path):
-                    icon_path = path
-                    break
-            
-            if not icon_path:
-                print("Warning: Could not find icon file for tray")
-                return
-            
-            icon_image = Image.open(icon_path)
-            icon_image = icon_image.resize((64, 64), Image.LANCZOS)
-            
-            def on_quit(icon, item):
-                self._quit_from_tray()
-            
-            def on_show(icon, item):
-                self._show_from_tray()
-            
-            menu = pystray.Menu(
-                pystray.MenuItem("Show", on_show, default=True),
-                pystray.MenuItem("Quit", on_quit)
+            # Start tray in subprocess
+            self.tray_process = subprocess.Popen(
+                [sys.executable, script_path],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True
             )
             
-            self.tray_icon = pystray.Icon("FFConverter", icon_image, "FFConverter", menu)
+            # Start monitoring thread
+            self.tray_monitor_thread = threading.Thread(target=self._monitor_tray, daemon=True)
+            self.tray_monitor_thread.start()
             
-            # Use spawn instead of threading.run() to avoid signal issues
-            self.tray_icon.run_detached()
-            print("System tray icon initialized (pystray spawn)")
+            print("System tray icon initialized (subprocess)")
         except Exception as e:
-            print(f"Warning: Failed to setup tray icon (pystray): {e}")
+            print(f"Warning: Failed to setup tray icon: {e}")
+
+    def _monitor_tray(self):
+        """Monitor tray icon for show/quit signals."""
+        import time
+        import os
+        
+        while True:
+            time.sleep(0.5)
+            if os.path.exists("/tmp/ffconverter_tray_show"):
+                os.remove("/tmp/ffconverter_tray_show")
+                self.after(0, self.deiconify)
+                self.after(0, self.lift)
+            if os.path.exists("/tmp/ffconverter_tray_quit"):
+                os.remove("/tmp/ffconverter_tray_quit")
+                self._quit_from_tray()
+                break
 
     def _show_from_tray(self, icon=None, item=None):
         """Show the main window from tray."""
