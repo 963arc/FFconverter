@@ -5,7 +5,7 @@ Summary:        Simple Video, Audio, and Image Converter for Linux
 
 License:        GPL-3.0-or-later
 URL:            https://github.com/963arc/FFConverter
-Source0:        %{name}-%{version}.tar.gz
+Source0:        /home/x/rpmbuild/SOURCES/FFConverter-1.0.tar.gz
 
 Requires:       python3
 Requires:       python3-pip
