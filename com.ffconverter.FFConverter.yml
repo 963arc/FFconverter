@@ -1,6 +1,6 @@
 app-id: com.ffconverter.FFConverter
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: ffconverter-launcher
 
@@ -17,21 +17,24 @@ add-extensions:
   org.freedesktop.Platform.ffmpeg-full:
     directory: lib/ffmpeg
     add-ld-path: .
-    version: '23.08'
+    version: '25.08'
 
 modules:
   - name: python-deps
     buildsystem: simple
     build-commands:
-      - pip3 install --prefix=/app --no-build-isolation --force-reinstall --root-user-action=ignore customtkinter send2trash tkinterdnd2 pillow
+      - pip3 install --prefix=/app --no-build-isolation packaging-26.2-py3-none-any.whl darkdetect-0.8.0-py3-none-any.whl customtkinter-5.2.2-py3-none-any.whl send2trash-2.1.0-py3-none-any.whl tkinterdnd2-0.4.3-py3-none-any.whl
     sources:
-      - type: pip
-        url: https://pypi.org/simple
-        packages:
-          - customtkinter
-          - send2trash
-          - tkinterdnd2
-          - pillow
+      - type: file
+        path: pip-wheels/packaging-26.2-py3-none-any.whl
+      - type: file
+        path: pip-wheels/darkdetect-0.8.0-py3-none-any.whl
+      - type: file
+        path: pip-wheels/customtkinter-5.2.2-py3-none-any.whl
+      - type: file
+        path: pip-wheels/send2trash-2.1.0-py3-none-any.whl
+      - type: file
+        path: pip-wheels/tkinterdnd2-0.4.3-py3-none-any.whl
 
   - name: ffconverter-app
     buildsystem: simple
@@ -44,23 +47,13 @@ modules:
       - cp LICENSE /app/share/licenses/com.ffconverter.FFConverter/
       - chmod +x /app/bin/ffconverter-launcher
     sources:
-      - type: dir
-        path: .
-        excludes:
-          - "*.yml"
-          - "*.yaml"
-          - "*.md"
-          - .git
-          - .github
-          - usr
-          - build-dir
-          - flatpak
-          - debian
-          - .flatpak-builder
-          - "*.spec"
-          - build-*
-          - ffc.flatpak
-          - FFConverter-*
-          - FFConverter-backup
-          - FFConverter-build
-          - ffconverter-flatpak
+      - type: file
+        path: ffc.py
+      - type: file
+        path: ffconverter-launcher
+      - type: file
+        path: ffconverter.desktop
+      - type: file
+        path: ffconverter.png
+      - type: file
+        path: LICENSE
