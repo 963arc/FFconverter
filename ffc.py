@@ -1,3 +1,22 @@
+# FFConverter - A simple, portable video, audio, and image converter for Linux.
+# Copyright (C) 2026 369ARC
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+#
+# Note: FFmpeg binaries bundled with this application are licensed
+# separately under LGPL. See the LICENSE file for full details.
+
 # Modules
 import os
 import sys
