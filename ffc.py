@@ -4213,6 +4213,7 @@ class FFConverterApp(CTkDnD):
             import subprocess
             import os
             import sys
+            import threading
             
             # Find icon - check multiple locations
             possible_paths = [
